@@ -2,12 +2,21 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> } 
  */
-exports.seed = async function(knex) {
+/**
+ * @param { import("knex").Knex } knex
+ * @returns { Promise<void> }
+ */
+exports.seed = function(knex) {
   // Deletes ALL existing entries
-  await knex('table_name').del()
-  await knex('table_name').insert([
-    {id: 1, colName: 'rowValue1'},
-    {id: 2, colName: 'rowValue2'},
-    {id: 3, colName: 'rowValue3'}
-  ]);
+  return knex('pet_type').del()
+    .then(() => {
+      // Inserts seed entries
+      return knex('pet_type').insert([
+        { id: 1, name: 'Bird' },
+        { id: 2, name: 'Cat' },
+        { id: 3, name: 'Dog' },
+        { id: 4, name: 'Fish' },
+      ]);
+    });
 };
+
